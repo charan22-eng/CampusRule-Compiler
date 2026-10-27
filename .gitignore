@@ -1,0 +1,37 @@
+# ==============================================================================
+# .gitignore for CampusRule Compiler (C11)
+# ==============================================================================
+
+# Compiled binaries and target directory
+bin/
+*.exe
+*.out
+*.app
+*.dll
+*.so
+*.dylib
+
+# Object files and intermediate build directory
+obj/
+*.o
+*.obj
+
+# Debug and memory diagnostic files
+*.dSYM/
+*.su
+*.idb
+*.pdb
+*.gch
+temp_*
+*.log
+*.tmp
+
+# Editor & OS temporary metadata
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+desktop.ini
