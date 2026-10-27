@@ -1,0 +1,805 @@
+A Course Based Project Report on
+CAMPUS RULE COMPILER 
+Submitted to the
+Department of Information Technology
+in partial fulfilment of the requirements for the completion of course
+COMPILER DESIGN AND COMPUTER NETWORKS LABORATORY (22PC2CS301)
+BACHELOR OF TECHNOLOGY IN
+INFORMATION TECHNOLOGY
+Submitted by
+M. Vibhas24071A1233
+B. Bhanu Prasad25075A1201
+B. Sai Hansika25075A1202
+G. Akshitha25075A1203
+Under the guidance of
+Dr. B. Srivani
+Assistant Professor, Department of IT, VNRVJIET
+Mrs. S. Renu Deepthi
+Assistant Professor, Department of IT, VNRVJIET
+                                                                       
+DEPARTMENT OF INFORMATION TECHNOLOGY
+VALLURUPALLI NAGESWARA RAO VIGNANAJYOTHI INSTIITUTEOF ENGINEERING &TECHNOLOGY
+An Autonomous Institute, NAAC Accredited with ‘A++’Grade,NBA VignanaJyothi Nagar, Pragathi Nagar, Nizampet(S.O), Hyderabad-500 090,TS, India
+VALLURUPALLI NAGESWARA RAO VIGNANA JYOTHI INSTITUTE OF ENGINEERING AND TECHNOLOGY
+An Autonomous Institute NAAC Accredited with ‘A++’ Grade, NBA Accredited for
+CE,EEE,ME,ECE,CSE,EIE,IT B.Tech Courses, Approved by AICTE,New Delhi, Affiliated to JNTUH, recognized as“College with Potential for Excellence” by UGC, ISO 9001:2015 Certified, QS I GUAGE Diamond Rated
+Vignana Jyothi Nagar, Pragathi Nagar,Nizampet(SO), Hyderabad-500090,TS,India DEPARTMENT OF INFORMATION TECHNOLOGY
+                                                                                                              
+CERTIFICATE
+This is to certify that the project report entitled “Campus Rule Compiler” is a Bonafide work done under our supervision and is being submitted by Mr. Vibhas (24071A1233), Mr. Bhanu Prasad(25071A1201), Miss. Sai Hansika (25071A1202), Miss. Akshitha (25071A1203) in partial fulfilment for the award of the degree of Bachelor of Technology in Information Technology, of the VNRVJIET, Hyderabad during the academic year 2026-2027.
+Dr. B. SrivaniDr. N. Mangathayaru
+Assistant Professor, IT                                                                   Professor& HOD, IT
+Mrs. S. Renu Deepthi
+Assistant Professor, IT                                                                    
+Course based projects Reviewer
+VALLURUPALLI NAGESWARA RAO VIGNANA JYOTHI INSTITUTE OF ENGINEERING AND TECHNOLOGY
+An autonomous Institute, NAAC Accredited with ‘A++’ Grade,
+Vignana Jyothi Nagar, Pragathi Nagar, Nizampet(SO),Hyderabad-500090,TS,India
+DEPARTMENT OF INFORMATION TECHNOLOGY
+                                                                       
+DECLARATION
+We declare that the course based project work entitled “Campus Rule Compiler” submitted in the Department of Information Technology, Vallurupalli Nageswara Rao Vignana Jyothi Institute of Engineering and Technology, Hyderabad, in partial fulfilment of the requirement for the award of the degree of Bachelor of Technology in Information Technology is a bonafide record of our own work carried out under the supervision of Dr. B. Srivani, Assistant Professor, Department of IT, Mrs. S. Renu Deepthi, Assistant Professor, Department of IT,VNRVJIET. Also, we declare that the matter embodied in this thesis has not been submitted by us in full or in any part thereof for the award of any degree/diploma of any other institution or university previously. Place: Hyderabad.
+M. Vibhas (24071A1233)
+B. Bhanu Prasad (25075A1201)
+B. Sai Hansika (25075A1202)
+G. Akshitha (25075A1203)
+ACKNOWLEDGEMENT
+We express our deep sense of gratitude to our beloved President, Sri. D. Suresh Babu, VNR Vignana Jyothi Institute of Engineering &Technology for the valuable guidance and for permitting us to carry out this project. With immense pleasure, we record our deep sense of gratitude to our beloved Principal, Dr. Chennakesava Rao, for permitting us to carry out this project. We express our deep sense of gratitude to our beloved Professor Dr. N. Mangathayaru, Professor and Head, Department of Information Technology, VNR Vignana Jyothi Institute of Engineering & Technology, Hyderabad-500090 for the valuable guidance and suggestions, keen interest and through encouragement extended throughout the period of project work. We take immense pleasure to express our deep sense of gratitude to our beloved Guide, Dr. B. Srivani, Assistant Professor in Information Technology, Mrs. S. Renu Deepthi, Assistant Professor in Information Technology VNR Vignana Jyothi Institute of Engineering & Technology, Hyderabad, for his/her valuable suggestions and rare insights, for constant source of encouragement and inspiration throughout my project work. We express our thanks to all those who contributed for the successful completion of our project work.
+M. Vibhas24071A1233
+B. Bhanu Prasad25075A1201
+B. Sai Hansika                                25075A1202
+G. Akshitha25075A1203
+TABLE OF CONTENTS
+S. No
+Contents
+Page No.
+1
+ABSTRACT
+06
+2
+INTRODUCTION
+07
+3
+STRUCTURE
+10
+4
+SOURCE CODE
+11
+5
+OUTPUT
+  29
+6
+CONCLUSION
+36
+7
+REFERENCES
+37
+ABSTRACT
+The CampusRule Compiler – A Domain-Specific Language for College Rule Automation is a compiler-based application designed to simplify and automate the evaluation of academic rules in educational institutions. Colleges follow various rules related to attendance, CGPA, marks, backlogs, examination eligibility, scholarships, and placement eligibility. Evaluating these rules manually can be time-consuming and may lead to errors. This project addresses these challenges by introducing a Domain-Specific Language (DSL) that allows administrators to define academic rules using simple, readable, and structured statements.
+The system follows the major phases of compiler design, including lexical analysis, syntax analysis, Abstract Syntax Tree (AST) generation, semantic analysis, and Three-Address Code (TAC) generation. After processing the rules, the system evaluates them against the academic details provided and generates appropriate results based on the defined conditions. A user-friendly graphical interface is incorporated to enable users to enter academic information, write or select rules, and view the evaluation results conveniently.
+The proposed system demonstrates the practical application of compiler design concepts in solving real-world problems in the educational domain. It aims to improve the accuracy, consistency, and efficiency of academic rule evaluation while reducing manual effort. The project also provides a flexible foundation for extending rule-based automation to other administrative processes in educational institutions.
+INTRODUCTION
+PROBLEM DEFINITION:
+In today's digital era, educational institutions are increasingly adopting automation to manage academic activities and administrative processes efficiently. However, evaluating academic rules related to attendance, CGPA, marks, backlogs, examination eligibility, scholarships, and placement eligibility can still involve manual effort. Applying these rules manually may be time-consuming, prone to human errors, and difficult to maintain when institutional requirements change. Therefore, there is a need for a simple, reliable, and flexible software system that can automate the evaluation of academic rules accurately.
+The problem addressed by this project is the lack of a simple and structured rule-based system that allows educational institutions to define and evaluate academic rules using easily understandable statements. Traditional approaches often rely on manually checking student records against predefined conditions. The proposed CampusRule Compiler – A Domain-Specific Language for College Rule Automation aims to overcome these limitations by introducing a Domain-Specific Language (DSL) specifically designed for expressing college academic rules. For example, a rule such as ATTENDANCE >= 75 AND BACKLOGS == 0 THEN ELIGIBLE can be used to represent a basic academic eligibility condition.
+Additionally, this project focuses on demonstrating the practical application of compiler design principles in developing a rule-based automation system. It incorporates essential compiler phases, including lexical analysis, syntax analysis, Abstract Syntax Tree (AST) generation, semantic analysis, Three-Address Code (TAC) generation, and rule evaluation. A user-friendly graphical interface is also included to enable administrators to enter academic details, define rules, and view evaluation results conveniently. The system aims to improve the accuracy, consistency, and efficiency of academic rule evaluation while reducing manual effort. This project serves as a practical learning model for understanding how compiler technologies can be applied to solve real-world problems in educational institutions.
+1.2 OBJECTIVE
+The primary objective of the CampusRule Compiler – A Domain-Specific Language for College Rule Automation is to develop a simple, reliable, and user-friendly application that automates the evaluation of academic rules in educational institutions. The system aims to simplify the process of checking student eligibility based on academic criteria such as attendance percentage, CGPA, marks, and the number of backlogs. By automating these evaluations, the project seeks to reduce manual effort, minimize errors, and provide consistent results.
+The project aims to design and implement a Domain-Specific Language (DSL) that allows administrators to define college academic rules using simple and readable statements. It focuses on applying the fundamental phases of compiler design, including lexical analysis, syntax analysis, Abstract Syntax Tree (AST) generation, semantic analysis, and Three-Address Code (TAC) generation. The system evaluates the defined rules against the provided student academic details and produces appropriate eligibility results based on the specified conditions.
+Additionally, the project aims to develop a user-friendly graphical interface through which users can enter academic information, define or select rules, and view evaluation results. It also focuses on demonstrating how compiler design concepts can be applied to a real-world educational problem. The overall objective is to create a flexible and extensible rule automation system that improves the efficiency, accuracy, and consistency of academic decision-making while providing practical experience in compiler construction and software development.
+1.3 SCOPE
+The scope of the CampusRule Compiler – A Domain-Specific Language for College Rule Automation is to develop a compiler-based application that simplifies and automates the evaluation of academic rules in educational institutions. The system focuses on defining academic conditions using a simple Domain-Specific Language (DSL) and evaluating them against student information to determine eligibility for various academic activities.
+The system covers the evaluation of academic rules related to attendance percentage, CGPA, marks, backlogs, examination eligibility, scholarship eligibility, and placement eligibility. It allows administrators to define rules using logical operators and comparison operators to represent different academic requirements. The compiler processes these rules through lexical analysis, syntax analysis, Abstract Syntax Tree (AST) generation, semantic analysis, and Three-Address Code (TAC) generation before evaluating the conditions and producing the results.
+Furthermore, the project includes a user-friendly graphical user interface (UI) that allows users to enter student academic details, write or select rules, execute the rules, and view the evaluation results. The system is primarily intended for academic demonstration and learning purposes, illustrating the practical application of compiler design concepts in solving real-world problems.
+The proposed system can be extended in the future to support database integration, bulk student record processing, additional academic rules, report generation, and administrative management features. However, the current scope is limited to the implementation of the core compiler phases, academic rule evaluation, and user interface required to demonstrate the functionality of the system.
+2.STRUCTURE:
+ruleengine/
+│
+├── Main.java
+├── CompilerUI.java
+├── Compiler.java
+├── Lexer.java
+├── Token.java
+├── Parser.java
+├── ASTNode.java
+├── CompareNode.java
+├── ConditionNode.java
+├── IfNode.java
+├── LogicNode.java
+├── ProgramNode.java
+├── SemanticAnalyzer.java
+├── TACGenerator.java
+└── RuleEvaluator.java
+3. SOURCE CODE:
+3.1 Main.java — Starting the application
+import javax.swing.*;
+import java.util.*;
+public class Main {
+    public static void main(String[] args) {
+        // java Main cli -> console mode (runs every built-in sample)
+        if (args.length > 0 && args[0].equalsIgnoreCase("cli")) {
+            cli();
+            return;
+        }
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (Exception ignored) {
+        }
+        SwingUtilities.invokeLater(CompilerUI::new);
+    }
+    private static void cli() {
+        for (Map.Entry<String, String> sample : Compiler.SAMPLES.entrySet()) {
+            System.out.println("\n################ " + sample.getKey() + " ################");
+            Compiler.Output out = Compiler.run(sample.getValue(), Compiler.defaultStudent());
+            for (String phase : Compiler.PHASES) {
+                System.out
+                        .println("\n========== " + phase.toUpperCase() + " [" + out.status.get(phase) + "] ==========");
+                if (out.status.get(phase) != Compiler.Status.SKIPPED)
+                    System.out.println(out.text.get(phase));
+            }
+            System.out.println("\n>>> " + (out.error != null ? out.error : out.verdict));
+        }
+    }
+}
+3.2 CompilerUI.java — Graphical interface
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.TitledBorder;
+import java.awt.*;
+import java.util.LinkedHashMap;
+import java.util.Map;
+public class CompilerUI extends JFrame {
+    private static final Color GREEN = new Color(0x2E7D32);
+    private static final Color RED = new Color(0xC62828);
+    private static final Color AMBER = new Color(0xEF6C00);
+    private static final Color GREY = new Color(0x9E9E9E);
+    private static final Font MONO = new Font(Font.MONOSPACED, Font.PLAIN, 14);
+    private final JTextArea editor = new JTextArea();
+    private final Map<String, JTextField> fields = new LinkedHashMap<>();
+    private final Map<String, JTextArea> areas = new LinkedHashMap<>();
+    private final Map<String, JLabel> chips = new LinkedHashMap<>();
+    private final JTabbedPane tabs = new JTabbedPane();
+    private final JLabel verdict = new JLabel(" ", SwingConstants.CENTER);
+    public CompilerUI() {
+        super("Rule Engine Compiler - Student Eligibility");
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setLayout(new BorderLayout(10, 10));
+        ((JComponent) getContentPane()).setBorder(new EmptyBorder(10, 10, 10, 10));
+        // ---- top: pipeline status chips ----
+        JPanel pipeline = new JPanel(new FlowLayout(FlowLayout.LEFT, 6, 0));
+        pipeline.add(new JLabel("Pipeline:"));
+        for (String phase : Compiler.PHASES) {
+            JLabel chip = new JLabel(phase);
+            chip.setOpaque(true);
+            chip.setForeground(Color.WHITE);
+            chip.setBackground(GREY);
+            chip.setFont(chip.getFont().deriveFont(Font.BOLD));
+            chip.setBorder(new EmptyBorder(4, 10, 4, 10));
+            chips.put(phase, chip);
+            pipeline.add(chip);
+        }
+        add(pipeline, BorderLayout.NORTH);
+        // ---- left: rule editor, samples, student data, run ----
+        JComboBox<String> samples = new JComboBox<>(Compiler.SAMPLES.keySet().toArray(new String[0]));
+        JPanel top = new JPanel(new BorderLayout(4, 4));
+       top.add(new JLabel("Rule input (what the user types):"), BorderLayout.NORTH);
+        top.add(samples, BorderLayout.SOUTH);
+        editor.setFont(MONO);
+        editor.setTabSize(4);
+        editor.setMargin(new Insets(6, 6, 6, 6));
+        JPanel studentPanel = new JPanel(new GridLayout(0, 2, 6, 6));
+        studentPanel.setBorder(new TitledBorder("Student data"));
+        for (Map.Entry<String, Double> e : Compiler.defaultStudent().entrySet()) {
+            JTextField tf = new JTextField(String.valueOf(e.getValue()));
+            fields.put(e.getKey(), tf);
+            studentPanel.add(new JLabel(e.getKey()));
+            studentPanel.add(tf);
+        }
+        JButton run = new JButton("Compile & Run");
+        run.setFont(run.getFont().deriveFont(Font.BOLD, 15f));
+        run.addActionListener(e -> run());
+        JPanel bottom = new JPanel(new BorderLayout(4, 8));
+        bottom.add(studentPanel, BorderLayout.CENTER);
+        bottom.add(run, BorderLayout.SOUTH);
+        JPanel left = new JPanel(new BorderLayout(6, 6));
+        left.setPreferredSize(new Dimension(380, 0));
+        left.add(top, BorderLayout.NORTH);
+        left.add(new JScrollPane(editor), BorderLayout.CENTER);
+        left.add(bottom, BorderLayout.SOUTH);
+        add(left, BorderLayout.WEST);
+        // ---- centre: one tab per phase ----
+        for (String phase : Compiler.PHASES) {
+            JTextArea area = new JTextArea();
+            area.setEditable(false);
+            area.setFont(MONO);
+            area.setMargin(new Insets(8, 8, 8, 8));
+            areas.put(phase, area);
+            tabs.addTab(phase, new JScrollPane(area));
+        }
+        add(tabs, BorderLayout.CENTER);
+        // ---- bottom: verdict banner ----
+        verdict.setOpaque(true);
+        verdict.setForeground(Color.WHITE);
+        verdict.setFont(verdict.getFont().deriveFont(Font.BOLD, 18f));
+        verdict.setBorder(new EmptyBorder(12, 12, 12, 12));
+        add(verdict, BorderLayout.SOUTH);
+        // ---- wiring ----
+        editor.setText(Compiler.SAMPLES.get(samples.getItemAt(0)));
+        samples.addActionListener(e -> {
+            editor.setText(Compiler.SAMPLES.get((String) samples.getSelectedItem()));
+            editor.setCaretPosition(0);
+            run();
+        });
+        setSize(1180, 720);
+        setLocationRelativeTo(null);
+        setVisible(true);
+        run();
+    }
+    private void run() {
+        Map<String, Double> student = new LinkedHashMap<>();
+        try {
+            for (Map.Entry<String, JTextField> e : fields.entrySet())
+                student.put(e.getKey(), Double.parseDouble(e.getValue().getText().trim()));
+        } catch (NumberFormatException ex) {
+            showVerdict("Student data fields must contain numbers", RED);
+            return;
+        }
+        Compiler.Output out = Compiler.run(editor.getText(), student);
+        int select = Compiler.PHASES.size() - 1;
+        boolean failureFound = false;
+        for (int i = 0; i < Compiler.PHASES.size(); i++) {
+            String phase = Compiler.PHASES.get(i);
+            Compiler.Status s = out.status.get(phase);
+            JTextArea area = areas.get(phase);
+            area.setText(out.text.get(phase));
+            area.setCaretPosition(0);
+            JLabel chip = chips.get(phase);
+            chip.setBackground(s == Compiler.Status.OK ? GREEN : s == Compiler.Status.FAILED ? RED : GREY);
+            tabs.setTitleAt(i, s == Compiler.Status.FAILED ? phase + "  (error)" : phase);
+            if (s == Compiler.Status.FAILED && !failureFound) {
+                select = i;
+                failureFound = true;
+            }
+        }
+        tabs.setSelectedIndex(select);
+        if (out.error != null)
+            showVerdict(out.error, RED);
+        else
+            showVerdict(out.verdict, out.eligible ? GREEN : AMBER);
+    }
+    private void showVerdict(String text, Color color) {
+        verdict.setText("<html><div style='text-align:center'>" + text.replace("<", "&lt;") + "</div></html>");
+        verdict.setBackground(color);
+    }
+}
+3.3 Compiler.java — Compiler pipeline
+import java.util.*;
+/**
+ * Runs every compiler phase and collects the text each phase produces (used by
+ * both UI and CLI).
+ */
+public class Compiler {
+    public enum Status {
+        OK, FAILED, SKIPPED
+    }
+    public static final List<String> PHASES = List.of("Input", "Lexical", "Parsing", "AST", "Semantic", "TAC",
+            "Result");
+    public static final Map<String, String> SAMPLES = new LinkedHashMap<>();
+    static {
+        SAMPLES.put("1. Simple exam rule",
+                "IF ATTENDANCE >= 75 THEN\nELIGIBLE EXAM\nEND");
+        SAMPLES.put("2. Compound AND",
+                "IF ATTENDANCE >= 75 AND BACKLOGS == 0 THEN\nELIGIBLE EXAM\nEND");
+        SAMPLES.put("3. Multiple rules (Exam + Placement)",
+                "IF ATTENDANCE >= 75 AND BACKLOGS == 0 THEN\nELIGIBLE EXAM\nEND\n\n"
+                        + "IF CGPA >= 7 AND MARKS >= 60 AND BACKLOGS == 0 THEN\nELIGIBLE PLACEMENT\nEND\n\n"
+                        + "IF ATTENDANCE < 75 OR BACKLOGS > 0 THEN\nNOT ELIGIBLE EXAM\nEND");
+        SAMPLES.put("4. Semantic error (ATTENDANCE = 120)",
+                "IF ATTENDANCE >= 120 AND CGPA > 12 THEN\nELIGIBLE EXAM\nEND");
+        SAMPLES.put("5. Syntax error (missing THEN)",
+                "IF ATTENDANCE >= 75\nELIGIBLE EXAM\nEND");
+        SAMPLES.put("6. Lexical error (invalid character)",
+                "IF ATTENDANCE >= 75 & BACKLOGS == 0 THEN\nELIGIBLE EXAM\nEND");
+    }
+    public static class Output {
+        public final Map<String, String> text = new LinkedHashMap<>();
+        public final Map<String, Status> status = new LinkedHashMap<>();
+        public String error; // null when compilation succeeded
+        public String verdict = "";
+        public boolean eligible;
+        Output() {
+            for (String p : PHASES) {
+                text.put(p, "(skipped: an earlier phase failed)");
+                status.put(p, Status.SKIPPED);
+            }
+        }
+        void ok(String phase, String body) {
+            text.put(phase, body);
+            status.put(phase, Status.OK);
+        }
+        void fail(String phase, String body, String err) {
+            text.put(phase, body);
+            status.put(phase, Status.FAILED);
+            error = err;
+        }
+    public static Map<String, Double> defaultStudent() {
+        Map<String, Double> s = new LinkedHashMap<>();
+        s.put("ATTENDANCE", 78.0);
+        s.put("CGPA", 8.2);
+        s.put("MARKS", 82.0);
+        s.put("BACKLOGS", 0.0);
+        return s;
+    }
+    public static Output run(String source, Map<String, Double> student) {
+        Output o = new Output();
+        o.ok("Input", source);
+        // 1. Lexical analysis
+        List<Token> tokens;
+        try {
+            tokens = new Lexer(source).tokenize();
+            StringBuilder sb = new StringBuilder();
+            int i = 1;
+            for (Token t : tokens)
+                sb.append(String.format("%2d. %s%n", i++, t));
+            o.ok("Lexical", sb.toString());
+        } catch (RuntimeException e) {
+            o.fail("Lexical", e.getMessage(), e.getMessage());
+            return o;
+        }
+        // 2. Parsing
+        ProgramNode ast;
+        try {
+            ast = new Parser(tokens).parse();
+            o.ok("Parsing", "Parsing Successful: " + ast.rules.size() + " rule(s) recognised");
+        } catch (RuntimeException e) {
+            o.fail("Parsing", e.getMessage(), e.getMessage());
+            return o;
+        }
+        // 3. AST
+        o.ok("AST", ast.tree());
+        // 4. Semantic analysis
+        SemanticAnalyzer analyzer = new SemanticAnalyzer();
+        StringBuilder sem = new StringBuilder();
+        if (!analyzer.analyze(ast, sem)) {
+            int more = analyzer.errors.size() - 1;
+            o.fail("Semantic", sem.toString(),
+                    "Semantic Error: " + analyzer.errors.get(0) + (more > 0 ? "  (+" + more + " more)" : ""));
+            return o;
+        }
+        o.ok("Semantic", sem.toString());
+        // 5. Three-address code
+        o.ok("TAC", new TACGenerator().generate(ast));
+        // 6. Rule evaluation
+        RuleEvaluator evaluator = new RuleEvaluator();
+        StringBuilder r = new StringBuilder("Student data: " + student + "\n\n");
+        List<String> fired = new ArrayList<>();
+        for (IfNode rule : ast.rules) {
+            boolean result = evaluator.evaluate(rule, student);
+            r.append("Rule ").append(rule.index).append(": ").append(rule.condition.text())
+                    .append("  ->  ").append(result ? "TRUE" : "FALSE").append("\n");
+            if (result) {
+                fired.add(rule.action);
+                r.append("        => ").append(rule.action).append("\n");
+            }
+        }
+        o.verdict = fired.isEmpty() ? "NOT ELIGIBLE" : String.join("   |   ", fired);
+        o.eligible = false;
+        for (String a : fired)
+            if (!a.startsWith("NOT"))
+                o.eligible = true;
+        r.append("\nFINAL RESULT: ").append(o.verdict);
+        o.ok("Result", r.toString());
+        return o;
+    }
+}
+3.4 Parser.java — Syntax analysis
+import java.util.*;
+/*
+ * Grammar
+ *   program   -> rule+ EOF
+ *   rule      -> IF orExpr THEN action END
+ *   orExpr    -> andExpr ( OR andExpr )*
+ *   andExpr   -> compare ( AND compare )*
+ *   compare   -> IDENTIFIER relop NUMBER
+ *   action    -> [NOT] ELIGIBLE ( EXAM | PLACEMENT )
+ */
+public class Parser {
+    private List<Token> tokens;
+    private int position = 0;
+    public Parser(List<Token> tokens) {
+        this.tokens = tokens;
+    }
+    private Token current() {
+        return tokens.get(position);
+    }
+    private String describe(Token t) {
+        if (t.type == Token.Type.EOF)
+            return "end of input";
+        return t.type.toString().equals(t.value) ? t.value : t.type + " '" + t.value + "'";
+    }
+    private RuntimeException error(String message) {
+        return new RuntimeException(
+                "Syntax Error (token " + (position + 1) + "): " + message
+                        + " but found " + describe(current()));
+    }
+    private Token consume(Token.Type type) {
+        if (current().type != type)
+            throw error("Expected " + type);
+        return tokens.get(position++);
+    }
+    public ProgramNode parse() {
+        if (current().type == Token.Type.EOF)
+            throw new RuntimeException("Syntax Error: Empty input, expected a rule starting with IF");
+        List<IfNode> rules = new ArrayList<>();
+        while (current().type != Token.Type.EOF)
+            rules.add(parseRule(rules.size() + 1));
+        return new ProgramNode(rules);
+    }
+    private IfNode parseRule(int index) {
+        consume(Token.Type.IF);
+        ConditionNode condition = parseOr();
+        consume(Token.Type.THEN);
+        String action = parseAction();
+        consume(Token.Type.END);
+        return new IfNode(index, condition, action);
+    }
+    private ConditionNode parseOr() {
+        ConditionNode left = parseAnd();
+        while (current().type == Token.Type.OR) {
+            position++;
+            left = new LogicNode("OR", left, parseAnd());
+        }
+        return left;
+    }
+    private ConditionNode parseAnd() {
+        ConditionNode left = parseCompare();
+        while (current().type == Token.Type.AND) {
+            position++;
+            left = new LogicNode("AND", left, parseCompare());
+        }
+        return left;
+    }
+    private ConditionNode parseCompare() {
+        Token variable = consume(Token.Type.IDENTIFIER);
+        Token operator = current();
+        if (operator.type != Token.Type.GREATER
+                && operator.type != Token.Type.LESS
+                && operator.type != Token.Type.GREATER_EQUAL
+                && operator.type != Token.Type.LESS_EQUAL
+                && operator.type != Token.Type.EQUAL
+                && operator.type != Token.Type.NOT_EQUAL) {
+            throw error("Expected a comparison operator (>, <, >=, <=, ==, !=)");
+        }
+        position++;
+        Token number = consume(Token.Type.NUMBER);
+        double value;
+        try {
+            value = Double.parseDouble(number.value);
+        } catch (NumberFormatException e) {
+            throw new RuntimeException("Syntax Error: Malformed number '" + number.value + "'");
+        }
+        return new CompareNode(variable.value, operator.value, value);
+    }
+    private String parseAction() {
+        boolean not = false;
+        if (current().type == Token.Type.NOT) {
+            consume(Token.Type.NOT);
+            not = true;
+        }
+        consume(Token.Type.ELIGIBLE);
+        String what;
+        if (current().type == Token.Type.EXAM) {
+            consume(Token.Type.EXAM);
+            what = "EXAM";
+        } else if (current().type == Token.Type.PLACEMENT) {
+            consume(Token.Type.PLACEMENT);
+            what = "PLACEMENT";
+        } else {
+            throw error("Expected EXAM or PLACEMENT");
+        }
+        return (not ? "NOT " : "") + "ELIGIBLE FOR " + what;
+    }
+3.5 SemanticAnalyzer.java — Semantic validation
+import java.util.*;
+public class SemanticAnalyzer {
+    private static final Map<String, double[]> RANGES = new LinkedHashMap<>();
+    static {
+        RANGES.put("ATTENDANCE", new double[] { 0, 100 });
+        RANGES.put("CGPA", new double[] { 0, 10 });
+        RANGES.put("MARKS", new double[] { 0, 100 });
+        RANGES.put("BACKLOGS", new double[] { 0, 50 });
+    }
+    public final List<String> errors = new ArrayList<>();
+    public static Set<String> variables() {
+        return RANGES.keySet();
+    }
+    /** Writes a report to 'out'. Returns true when there are no semantic errors. */
+    public boolean analyze(ProgramNode program, StringBuilder out) {
+        Set<String> seenActions = new HashSet<>();
+        for (IfNode rule : program.rules) {
+            out.append("Rule ").append(rule.index).append(": ").append(rule.action).append("\n");
+            check(rule.condition, rule.index, out);
+            if (!seenActions.add(rule.action))
+                report(out, rule.index, "Duplicate rule: '" + rule.action
+                        + "' is already defined by an earlier rule");
+            out.append("\n");
+        }
+        if (errors.isEmpty())
+            out.append("Semantic Analysis Successful");
+        else
+            out.append(errors.size()).append(" semantic error(s) found");
+        return errors.isEmpty();
+    }
+    private void check(ConditionNode c, int rule, StringBuilder out) {
+        if (c instanceof LogicNode) {
+            LogicNode l = (LogicNode) c;
+            check(l.left, rule, out);
+            check(l.right, rule, out);
+            return;
+        }
+        CompareNode cn = (CompareNode) c;
+        double[] range = RANGES.get(cn.variable);
+        if (range == null) {
+            report(out, rule, "Unknown variable '" + cn.variable + "' (allowed: " + RANGES.keySet() + ")");
+            return;
+        }
+        if (cn.value < range[0] || cn.value > range[1]) {
+            report(out, rule, cn.variable + " = " + cn.value
+                    + " is outside the valid range [" + (int) range[0] + ", " + (int) range[1] + "]");
+            return;
+        }
+        if (cn.variable.equals("BACKLOGS") && cn.value != Math.floor(cn.value)) {
+            report(out, rule, "BACKLOGS must be a whole number, found " + cn.value);
+            return;
+        }
+        out.append("  [OK]    ").append(cn.text())
+                .append("   (valid range ").append((int) range[0]).append("-").append((int) range[1]).append(")\n");
+    }
+    private void report(StringBuilder out, int rule, String message) {
+        errors.add("Rule " + rule + ": " + message);
+        out.append("  [ERROR] ").append(message).append("\n");
+    }
+}
+3.6 TACGenerator.java — Intermediate code
+public class TACGenerator {
+    private int temp = 1;
+    private int label = 1;
+    public String generate(ProgramNode program) {
+        StringBuilder sb = new StringBuilder();
+        for (IfNode rule : program.rules) {
+            sb.append("Rule ").append(rule.index).append(":\n");
+            String result = gen(rule.condition, sb);
+            String skip = "L" + label++;
+            sb.append("    IF_FALSE ").append(result).append(" GOTO ").append(skip).append("\n");
+            sb.append("    PRINT \"").append(rule.action).append("\"\n");
+            sb.append(skip).append(":\n\n");
+        }
+        return sb.toString();
+    }
+    /** Emits code for a condition and returns the temp holding its value. */
+    private String gen(ConditionNode c, StringBuilder sb) {
+        if (c instanceof CompareNode) {
+            CompareNode cn = (CompareNode) c;
+            String t = "t" + temp++;
+            sb.append("    ").append(t).append(" = ").append(cn.text()).append("\n");
+            return t;
+        }
+        LogicNode l = (LogicNode) c;
+        String a = gen(l.left, sb);
+        String b = gen(l.right, sb);
+        String t = "t" + temp++;
+        sb.append("    ").append(t).append(" = ").append(a).append(" ").append(l.op).append(" ").append(b).append("\n");
+        return t;
+    }
+}
+3.7 RuleEvaluator.java — Evaluating rules
+import java.util.*;
+public class RuleEvaluator {
+    public boolean evaluate(IfNode node, Map<String, Double> student) {
+        return eval(node.condition, student);
+    }
+    private boolean eval(ConditionNode c, Map<String, Double> student) {
+        if (c instanceof LogicNode) {
+            LogicNode l = (LogicNode) c;
+            boolean a = eval(l.left, student);
+            boolean b = eval(l.right, student);
+            return l.op.equals("AND") ? (a && b) : (a || b);
+        }
+        CompareNode cn = (CompareNode) c;
+        double actual = student.get(cn.variable);
+        switch (cn.operator) {
+            case ">":
+                return actual > cn.value;
+            case "<":
+                return actual < cn.value;
+            case ">=":
+                return actual >= cn.value;
+            case "<=":
+                return actual <= cn.value;
+            case "==":
+                return actual == cn.value;
+            case "!=":
+                return actual != cn.value;
+            default:
+                return false;
+        }
+    }
+}
+3.8 Lexer.java
+import java.util.*;
+public class Lexer {
+    private String input;
+    private int pos = 0;
+    private List<Token> tokens = new ArrayList<>();
+    public Lexer(String input) {
+        this.input = input;
+    }
+    public List<Token> tokenize() {
+        while (pos < input.length()) {
+            char c = input.charAt(pos);
+            if (Character.isWhitespace(c)) {
+                pos++;
+            } else if (Character.isLetter(c) || c == '_') {
+                readWord();
+            } else if (Character.isDigit(c)) {
+                readNumber();
+            } else {
+                readOperator();
+            }
+        }
+        tokens.add(new Token(Token.Type.EOF, ""));
+        return tokens;
+    }
+    private void readWord() {
+        int start = pos;
+        while (pos < input.length() &&
+                (Character.isLetterOrDigit(input.charAt(pos))
+                        || input.charAt(pos) == '_')) {
+            pos++;
+        }
+        String word = input.substring(start, pos).toUpperCase();
+        Token.Type type;
+        switch (word) {
+            case "IF":
+                type = Token.Type.IF;
+                break;
+            case "THEN":
+                type = Token.Type.THEN;
+                break;
+            case "END":
+                type = Token.Type.END;
+                break;
+            case "ELIGIBLE":
+                type = Token.Type.ELIGIBLE;
+                break;
+            case "EXAM":
+                type = Token.Type.EXAM;
+                break;
+            case "PLACEMENT":
+                type = Token.Type.PLACEMENT;
+                break;
+            case "NOT":
+                type = Token.Type.NOT;
+                break;
+            case "AND":
+                type = Token.Type.AND;
+                break;
+            case "OR":
+                type = Token.Type.OR;
+                break;
+            default:
+                type = Token.Type.IDENTIFIER;
+        }
+        tokens.add(new Token(type, word));
+    }
+    private void readNumber() {
+        int start = pos;
+        boolean dot = false;
+        while (pos < input.length()) {
+            char c = input.charAt(pos);
+            if (Character.isDigit(c)) {
+                pos++;
+            } else if (c == '.' && !dot
+                    && pos + 1 < input.length()
+                    && Character.isDigit(input.charAt(pos + 1))) {
+                dot = true;
+                pos++;
+            } else {
+                break;
+            }
+        }
+        tokens.add(new Token(Token.Type.NUMBER,
+                input.substring(start, pos)));
+    
+    private void readOperator() {
+        char c = input.charAt(pos);
+        char next = pos + 1 < input.length()
+                ? input.charAt(pos + 1)
+                : '\0';
+        switch (c) {
+            case '>':
+                if (next == '=') {
+                    add(Token.Type.GREATER_EQUAL, ">=", 2);
+                } else {
+                    add(Token.Type.GREATER, ">", 1);
+                }
+                break;
+            case '<':
+                if (next == '=') {
+                    add(Token.Type.LESS_EQUAL, "<=", 2);
+                } else {
+                    add(Token.Type.LESS, "<", 1);
+                }
+                break;
+            case '=':
+                if (next == '=') {
+                    add(Token.Type.EQUAL, "==", 2);
+                } else {
+                    throw lexicalError(c);
+                }
+                break;
+            case '!':
+                if (next == '=') {
+                    add(Token.Type.NOT_EQUAL, "!=", 2);
+                } else {
+                    throw lexicalError(c);
+                }
+                break;
+            default:
+                throw lexicalError(c);
+        }
+    }
+    private void add(Token.Type type, String value, int length) {
+        tokens.add(new Token(type, value));
+        pos += length;
+    }
+    private RuntimeException lexicalError(char c) {
+        return new RuntimeException(
+                "Lexical Error: Invalid character '" + c
+                        + "' at position " + (pos + 1));
+    }
+}
+3.9 Token.java
+public class Token {
+    public enum Type {
+        IF, THEN, END,
+        ELIGIBLE, EXAM, PLACEMENT, NOT,
+        AND, OR,
+        IDENTIFIER, NUMBER,
+        GREATER, LESS, GREATER_EQUAL, LESS_EQUAL,
+        EQUAL, NOT_EQUAL,
+        EOF
+    }
+    public Type type;
+    public String value;
+    public Token(Type type, String value) {
+        this.type = type;
+        this.value = value;
+    }
+    @Override
+    public String toString() {
+        return type + " '" + value + "'";
+    }
+}
+4.OUTPUT:
+4.1 Main Application Interface
+4.2 Input Rule and Student Details
+4.3 Lexical Analysis
+4.4 Syntax Analysis
+4.5 Abstract Syntax Tree
+4.6 Semantic Analysis
+4.7 Three-Address Code Generation
+4.8 Final Eligibility Result
+4.9 Compound Condition Evaluation.
+4.10 Multiple Rule Evaluation
+4.11 Semantic Error Detection
+4.12 Syntax Error Detection
+4.13 Lexical Error Detection
+CONCLUSION:
+The CampusRule Compiler – A Domain-Specific Language for College Rule Automation provides a systematic approach to automating the evaluation of academic rules in educational institutions. The project demonstrates how compiler design principles can be applied to a real-world problem by allowing academic rules to be defined using a simple and readable Domain-Specific Language (DSL). It helps simplify the evaluation of conditions related to attendance, CGPA, marks, backlogs, examination eligibility, scholarship eligibility, and placement eligibility.
+The system incorporates the major phases of compiler design, including lexical analysis, syntax analysis, Abstract Syntax Tree (AST) generation, semantic analysis, and Three-Address Code (TAC) generation, followed by rule evaluation. These phases help ensure that the defined rules are processed systematically and that invalid syntax or semantic errors can be identified. The user-friendly graphical interface further improves usability by allowing users to enter student details, define academic rules, and view the corresponding evaluation results conveniently.
+Overall, this project provides practical experience in compiler construction, rule-based processing, and software application development. It demonstrates the potential of Domain-Specific Languages to reduce manual effort, improve consistency, and support efficient academic decision-making. The system can be enhanced in the future by incorporating database integration, bulk student data processing, advanced rule management, report generation, and additional administrative features, making it more suitable for real-world educational environments.
+REFERENCES:
+https://docs.python.org/3/ — Official Python Documentation covering programming fundamentals, data structures, and language concepts used in compiler implementation.
+https://flask.palletsprojects.com/ — Official Flask Documentation covering web application development, routing, and frontend-backend integration.
+https://www.geeksforgeeks.org/compiler-design/ — Compiler Design tutorials covering lexical analysis, syntax analysis, Abstract Syntax Trees (AST), semantic analysis, and intermediate code generating
